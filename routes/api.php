@@ -11,14 +11,15 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
-
+   
   
 
     Route::middleware('role:admin')->group(function () {
         Route::post('/posts', [PostController::class, 'store']);
+        Route::get('/users', [AuthController::class, 'getAllUsers']);
     });
     
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:manager|admin')->group(function () {
         Route::put('/posts/{id}', [PostController::class, 'update']);
     });
     

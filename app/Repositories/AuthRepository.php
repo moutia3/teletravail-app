@@ -42,4 +42,9 @@ class AuthRepository implements AuthRepositoryInterface
     {
         return $user;
     }
+
+    public function getAllUsers()
+    {
+        return User::all(); 
+    }
 }
