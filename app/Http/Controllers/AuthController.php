@@ -66,4 +66,10 @@ class AuthController extends Controller
 
         return response()->json($user);
     }
+
+    public function getAllUsers()
+    {
+        $users = $this->authRepository->getAllUsers();
+        return response()->json($users);
+    }
 }

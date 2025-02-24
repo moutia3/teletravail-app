@@ -8,4 +8,5 @@ interface AuthRepositoryInterface
     public function login(array $credentials);
     public function logout($user);
     public function getUser($user);
+    public function getAllUsers();
 }
