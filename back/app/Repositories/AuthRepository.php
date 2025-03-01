@@ -7,12 +7,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
 
 class AuthRepository implements AuthRepositoryInterface
 {
+    public function sendWelcomeEmail($email, $password)
+    {
+        Mail::raw("Votre compte a été créé avec succès. Voici vos informations de connexion :\n\nEmail: $email\nMot de passe: $password", function ($message) use ($email) {
+            $message->to($email)
+                    ->subject('Bienvenue sur notre application');
+        });
+    }
+
     public function sendResetLinkEmail(array $data)
     {
         $status = Password::sendResetLink($data);
@@ -51,6 +59,7 @@ class AuthRepository implements AuthRepositoryInterface
         ]);
 
         $user->assignRole($data['role']);
+        $this->sendWelcomeEmail($user->email, $data['password']);
 
         return $user;
     }
