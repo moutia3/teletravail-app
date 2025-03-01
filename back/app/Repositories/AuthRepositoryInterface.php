@@ -14,4 +14,5 @@ interface AuthRepositoryInterface
     public function resetPassword(array $data);
     public function updateUser($id, array $data);
     public function deleteUser($id); 
+    public function sendWelcomeEmail($email, $password);
 }
