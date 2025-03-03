@@ -1,8 +1,0 @@
-<div class="dashboard-container">
-    <h2>Tableau de bord</h2>
-    <div *ngIf="user">
-      <p>Bienvenue, {{ user.name }} ({{ user.email }})</p>
-      <p>Votre rôle : {{ user.role }}</p>
-    </div>
-    <button (click)="logout()">Se déconnecter</button>
-  </div>
