@@ -7,7 +7,7 @@ use App\Http\Controllers\PostController;
 
 
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', action: [AuthController::class, 'login']);
 
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail']);
 Route::get('/reset-password/{token}', function ($token) {
@@ -16,6 +16,7 @@ Route::get('/reset-password/{token}', function ($token) {
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user/roles', [AuthController::class, 'getUserRoles']); 
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('/profile', [AuthController::class, 'updateProfile']);
