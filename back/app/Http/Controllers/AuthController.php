@@ -44,7 +44,7 @@ class AuthController extends Controller
         return response()->json(['message' => $response['message']], $response['status']);
     }
 
-    public function register(Request $request)
+    public function addUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
@@ -57,7 +57,7 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $user = $this->authRepository->register($request->all());
+        $user = $this->authRepository->addUser($request->all());
 
         return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
     }

@@ -50,7 +50,7 @@ class AuthRepository implements AuthRepositoryInterface
             : ['message' => __($status), 'status' => 400];
     }
 
-    public function register(array $data)
+    public function addUser(array $data)
     {
         $user = User::create([
             'name' => $data['name'],

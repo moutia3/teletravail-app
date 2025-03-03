@@ -7,7 +7,6 @@ use App\Http\Controllers\PostController;
 
 
 
-Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail']);
@@ -26,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
   
 
     Route::middleware('role:admin')->group(function () {
+        Route::post('/addUser', [AuthController::class, 'addUser']);
         Route::post('/posts', [PostController::class, 'store']);
         Route::get('/users', [AuthController::class, 'getAllUsers']);
         Route::put('/users/{id}', [AuthController::class, 'updateUser']);
