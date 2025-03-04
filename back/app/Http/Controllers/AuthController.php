@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthController extends Controller
@@ -203,6 +204,15 @@ public function getProfile(Request $request)
     }
 
     return response()->json(['message' => 'User deleted successfully'], 200);
+}
+
+public function getUserRoles(Request $request)
+{
+    // Get the authenticated user
+    $user = Auth::user();
+
+    // Return the user's roles
+    return response()->json($user->getRoleNames(), 200);
 }
 
 
