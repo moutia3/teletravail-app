@@ -37,11 +37,11 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:8|confirmed',
         ]);
-
+    
         $response = $this->authRepository->resetPassword($request->only(
             'email', 'password', 'password_confirmation', 'token'
         ));
-
+    
         return response()->json(['message' => $response['message']], $response['status']);
     }
 
@@ -93,7 +93,7 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = $this->authRepository->getUser($request->user());
-
+    
         return response()->json($user);
     }
 

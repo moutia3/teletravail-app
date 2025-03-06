@@ -38,13 +38,13 @@ class AuthRepository implements AuthRepositoryInterface
                 $user->forceFill([
                     'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));
-
+    
                 $user->save();
-
+    
                 event(new PasswordReset($user));
             }
         );
-
+    
         return $status === Password::PASSWORD_RESET
             ? ['message' => __($status), 'status' => 200]
             : ['message' => __($status), 'status' => 400];
@@ -87,7 +87,7 @@ class AuthRepository implements AuthRepositoryInterface
 
     public function getAllUsers()
     {
-        return User::all(); 
+        return User::with('roles')->get(); 
     }
     public function getUserById($id)
 {
