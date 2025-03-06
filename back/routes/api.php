@@ -11,7 +11,7 @@ Route::post('/login', action: [AuthController::class, 'login']);
 
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail']);
 Route::get('/reset-password/{token}', function ($token) {
-    return response()->json(['token' => $token]);
+    return redirect()->to("http://localhost:4200/reset-password/$token");
 })->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
